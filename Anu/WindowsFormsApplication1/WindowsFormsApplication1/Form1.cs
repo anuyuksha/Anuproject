@@ -35,5 +35,10 @@ namespace WindowsFormsApplication1
             Form2 p2 = new Form2();
             p2.ShowDialog();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
