@@ -56,29 +56,28 @@ namespace WindowsFormsApplication1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            int x, y, z;
+            int m,n, z;
             string a, b;
             a = textBox1.Text;
             b = textBox2.Text;
-
-            x = int.Parse(a);
-            y = int.Parse(b);
+            m= int.Parse(a);
+            n = int.Parse(b);
             CheckState state = checkBox1.CheckState;
             CheckState state2 = checkBox2.CheckState;
-            if (x < 1944 || x > 2013)
+            if (m< 1944 )
             {
-                MessageBox.Show("please enter year between 1944 and 2013", "Error");
+                MessageBox.Show("enter year greater than 1944", "Error");
             }
-
+            else if (m > 2013)
+            {
+                MessageBox.Show("enter year less than  2013", "Error");
+            }
             else
             {
-
                 if (checkBox1.Checked == false && checkBox2.Checked == false)
                 {
-                    MessageBox.Show("please select male , female or both", "Error");
+                    MessageBox.Show("select male , female or both", "Error");
                 }
-
-
                 else
                 {
                     
@@ -91,13 +90,7 @@ namespace WindowsFormsApplication1
                         sqlComman.ExecuteNonQuery();
                         z = Convert.ToInt32(sqlComman.ExecuteScalar().ToString());
                         sqlConnection.Close();
-
-
-                        if (y > z)
-                        {
-                            MessageBox.Show("please enter valid number in 'TOP' space  ", "Error");
-                        }
-                        else
+                        if(n<=z)
                         {
                             SqlCommand sqlCommand = new SqlCommand();
                             sqlCommand.Connection = sqlConnection;
@@ -110,6 +103,10 @@ namespace WindowsFormsApplication1
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
+                        else
+                        {
+                            MessageBox.Show("enter valid number in 'TOP' space  ", "Error");
+                        }
                     }
 
                     else if (checkBox1.Checked)
@@ -121,13 +118,7 @@ namespace WindowsFormsApplication1
                         sqlComman.ExecuteNonQuery();
                         z = Convert.ToInt32(sqlComman.ExecuteScalar().ToString());
                         sqlConnection.Close();
-
-
-                        if (y > z)
-                        {
-                            MessageBox.Show("please enter valid number in 'TOP' space  ", "Error");
-                        }
-                        else
+                        if(n<=z)
                         {
                             SqlCommand sqlCommand = new SqlCommand();
                             sqlCommand.Connection = sqlConnection;
@@ -140,6 +131,10 @@ namespace WindowsFormsApplication1
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
+                        else
+                        {
+                            MessageBox.Show("enter valid number in 'TOP' space  ", "Error");
+                        }
                     }
                     else if (checkBox2.Checked)
                     {
@@ -150,13 +145,7 @@ namespace WindowsFormsApplication1
                         sqlComman.ExecuteNonQuery();
                         z = Convert.ToInt32(sqlComman.ExecuteScalar().ToString());
                         sqlConnection.Close();
-
-
-                        if (y > z)
-                        {
-                            MessageBox.Show("please enter valid number in 'TOP' space  ", "Error");
-                        }
-                        else
+                        if(n<=z)
                         {
                             SqlCommand sqlCommand = new SqlCommand();
                             sqlCommand.Connection = sqlConnection;
@@ -169,12 +158,13 @@ namespace WindowsFormsApplication1
                             da.Fill(dt);
                             dataGridView1.DataSource = dt;
                         }
+                        else
+                        {
+                            MessageBox.Show("enter valid number in 'TOP' space  ", "Error");
+                        }
                     }
                 }
             }
-            
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)

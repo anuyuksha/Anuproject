@@ -56,31 +56,32 @@ namespace WindowsFormsApplication1
             chart1.Series[0].Points.Clear();
 
 
-            int x, y;
+            int m, n;
 
             string a;
             a = textBox2.Text;
-            x = int.Parse(a);
-            if (x < 1944 || x > 2013)
+            m = int.Parse(a);
+            if (m < 1944 || m > 2013)
             {
-                MessageBox.Show("please enter year between 1944 and 2013", "Error");
+                MessageBox.Show("enter year between 1944 and 2013", "Error");
             }
             else
             {
                 if (checkBox1.Checked == false && checkBox2.Checked == false)
                 {
-                    MessageBox.Show("please select male , female or both", "Error");
+                    MessageBox.Show("select male , female or both", "Error");
                 }
                 else
                 {
                     if (checkBox1.Checked == true && checkBox2.Checked == true)
                     {
-                        for (y = x; y <= 2013; y++)
+                        n = m;
+                        while (n <= 2013)
                         {
                             int q, p;
-                            string l, n;
-                            q = y;
-                            l = y.ToString();
+                            string l, k;
+                            q = n;
+                            l = n.ToString();
                             SqlCommand sqlComman = new SqlCommand();
                             sqlComman.Connection = sqlConnection;
                             sqlConnection.Open();
@@ -89,32 +90,34 @@ namespace WindowsFormsApplication1
                             sqlComman.ExecuteNonQuery();
 
                             object d = sqlComman.ExecuteScalar();
-                            if (d == null || d == DBNull.Value)
+                            if (d != null && d != DBNull.Value)
                             {
-                                p = 0;
+
+
+                                k = sqlComman.ExecuteScalar().ToString();
+                                p = int.Parse(k);
+
                             }
                             else
                             {
-
-
-                                n = sqlComman.ExecuteScalar().ToString();
-                                p = int.Parse(n);
-
+                                p = 0;
                             }
                             sqlConnection.Close();
                             chart1.Series["Series1"].Points.AddXY(q, p);
                             chart1.Series["Series1"].ChartType = SeriesChartType.Bar;
-
+                            n++;
                         }
+                        
                     }
                     else if (checkBox1.Checked)
                     {
-                        for (y = x; y <= 2013; y++)
+                        n = m;
+                        while (n<=2013)
                         {
                             int q, p;
-                            string l, n;
-                            q = y;
-                            l = y.ToString();
+                            string l, k;
+                            q = n;
+                            l = n.ToString();
                             SqlCommand sqlComman = new SqlCommand();
                             sqlComman.Connection = sqlConnection;
                             sqlConnection.Open();
@@ -123,32 +126,35 @@ namespace WindowsFormsApplication1
                             sqlComman.ExecuteNonQuery();
 
                             object d = sqlComman.ExecuteScalar();
-                            if (d == null || d == DBNull.Value)
+                            if (d != null && d != DBNull.Value)
                             {
-                                p = 0;
+
+
+                                k = sqlComman.ExecuteScalar().ToString();
+                                p = int.Parse(k);
+
                             }
                             else
                             {
-
-
-                                n = sqlComman.ExecuteScalar().ToString();
-                                p = int.Parse(n);
-
+                                p = 0;
                             }
                             sqlConnection.Close();
                             chart1.Series["Series1"].Points.AddXY(q, p);
                             chart1.Series["Series1"].ChartType = SeriesChartType.Bar;
+                            n++;
                         }
+                        
                     }
 
                     else if (checkBox2.Checked)
                     {
-                        for (y = x; y <= 2013; y++)
+                        n = m;
+                        while (n <= 2013)
                         {
                             int q, p;
-                            string l, n;
-                            q = y;
-                            l = y.ToString();
+                            string l, k;
+                            q = n;
+                            l = n.ToString();
                             SqlCommand sqlComman = new SqlCommand();
                             sqlComman.Connection = sqlConnection;
                             sqlConnection.Open();
@@ -157,22 +163,24 @@ namespace WindowsFormsApplication1
                             sqlComman.ExecuteNonQuery();
 
                             object d = sqlComman.ExecuteScalar();
-                            if (d == null || d == DBNull.Value)
+                            if(d!=null && d!=DBNull.Value)
                             {
-                                p = 0;
+
+
+                                k = sqlComman.ExecuteScalar().ToString();
+                                p = int.Parse(k);
+
                             }
                             else
                             {
-
-
-                                n = sqlComman.ExecuteScalar().ToString();
-                                p = int.Parse(n);
-
+                                p = 0;
                             }
                             sqlConnection.Close();
                             chart1.Series["Series1"].Points.AddXY(q, p);
                             chart1.Series["Series1"].ChartType = SeriesChartType.Bar;
+                            n++;
                         }
+                        
                     }
 
 
