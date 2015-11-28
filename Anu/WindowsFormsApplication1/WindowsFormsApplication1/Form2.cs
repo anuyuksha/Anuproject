@@ -54,16 +54,17 @@ namespace WindowsFormsApplication1
         private void button1_Click(object sender, EventArgs e)
         {
             chart1.Series[0].Points.Clear();
-
-
             int m, n;
-
             string a;
             a = textBox2.Text;
             m = int.Parse(a);
-            if (m < 1944 || m > 2013)
+            if (m < 1944)
             {
-                MessageBox.Show("enter year between 1944 and 2013", "Error");
+                MessageBox.Show("enter year greater than 1944", "Error");
+            }
+            else if (m > 2013)
+            {
+                MessageBox.Show("enter year less than  2013", "Error");
             }
             else
             {
@@ -86,17 +87,13 @@ namespace WindowsFormsApplication1
                             sqlComman.Connection = sqlConnection;
                             sqlConnection.Open();
                             sqlComman.CommandText = "select sum(cast(Amount as int)) from merg where [Given Name] = '" + textBox1.Text + "' AND Year = '" + l + "'; ";
-
-                            sqlComman.ExecuteNonQuery();
-
+                  
+                            sqlComman.ExecuteNonQuery();                  
                             object d = sqlComman.ExecuteScalar();
                             if (d != null && d != DBNull.Value)
                             {
-
-
                                 k = sqlComman.ExecuteScalar().ToString();
                                 p = int.Parse(k);
-
                             }
                             else
                             {
@@ -107,7 +104,6 @@ namespace WindowsFormsApplication1
                             chart1.Series["Series1"].ChartType = SeriesChartType.Bar;
                             n++;
                         }
-                        
                     }
                     else if (checkBox1.Checked)
                     {
@@ -122,9 +118,7 @@ namespace WindowsFormsApplication1
                             sqlComman.Connection = sqlConnection;
                             sqlConnection.Open();
                             sqlComman.CommandText = "SELECT amount FROM malef where [Given Name] = '" + textBox1.Text + "'  AND Year = '" + l + "';";
-
                             sqlComman.ExecuteNonQuery();
-
                             object d = sqlComman.ExecuteScalar();
                             if (d != null && d != DBNull.Value)
                             {
